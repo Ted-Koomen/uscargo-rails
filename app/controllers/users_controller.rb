@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
-     def new 
-        user = User.new(username: params[:userName], email: params[:email], password_digest: params[:password], access_token: SecureRandom.base64)
+    
+    def index
+        users = User.all
+        render json: users
+    end
+    def new 
+        user = User.new(username: params[:userName], email: params[:email], password:params[:password], access_token: SecureRandom.base64)
         if !user.save
             render json: user.errors.full_messages
         end
